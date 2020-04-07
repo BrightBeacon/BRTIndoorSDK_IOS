@@ -17,8 +17,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //比例尺
     self.mapView.showsScale = YES;
+    self.mapView.scaleBarPosition = MGLOrnamentPositionTopLeft;
+    self.mapView.scaleBarMargins = CGPointZero;
+    
+    //指南针
     self.mapView.compassView.hidden = NO;
-//    self.mapView.compassView.center = CGPointMake(80, 80);
+    self.mapView.compassViewPosition = MGLOrnamentPositionTopRight;
+    self.mapView.compassViewMargins = CGPointZero;
+    
+    //logo
+    self.mapView.logoView.hidden = NO;
+    self.mapView.logoViewPosition = MGLOrnamentPositionBottomLeft;
+    self.mapView.logoViewMargins = CGPointZero;
 }
 @end

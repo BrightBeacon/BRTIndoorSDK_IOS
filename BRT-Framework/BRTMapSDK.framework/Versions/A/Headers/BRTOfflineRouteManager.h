@@ -104,6 +104,13 @@
  */
 - (MGLMultiPolyline *)route;
 
+/**
+ 路网
+
+ @return 整条路线
+ */
+- (MGLMultiPolyline *)routeOnFloor:(int)floor;
+
 
 /**
  设置禁止通行点

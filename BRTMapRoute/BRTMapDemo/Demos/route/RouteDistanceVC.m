@@ -22,6 +22,7 @@
     
     self.tipsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 120)];
     self.tipsLabel.numberOfLines = 0;
+    self.tipsLabel.textColor = [UIColor blackColor];
     self.tipsLabel.font = [UIFont systemFontOfSize:12];
     self.tipsLabel.text = @"距离提示";
     [self.view addSubview:self.tipsLabel];

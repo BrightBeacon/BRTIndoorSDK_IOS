@@ -70,6 +70,18 @@
     if (error) {
         return;
     }
+    BRTFloorInfo *info = mapView.floorInfos.firstObject;
+    BRTLocalPoint *start = [BRTLocalPoint pointWithX:info.mapExtent.xmin Y:info.mapExtent.ymin Floor:info.floorNumber];
+    BRTLocalPoint *end = [BRTLocalPoint pointWithX:info.mapExtent.xmax Y:info.mapExtent.ymax Floor:info.floorNumber];
+    MGLPointAnnotation *ann  = [[MGLPointAnnotation alloc] init];
+    ann.coordinate = start.coordinate;
+    ann.title = @"1";
+    MGLPointAnnotation *xannn = [[MGLPointAnnotation alloc] init];
+    xannn.coordinate = end.coordinate;
+    xannn.title = @"2";
+    
+    [self.mapView addAnnotations:@[ann,xannn]];
+    
     [self initSymbols];
     [self initLocationSymbol];
     if ([self.mapView.building.routeVersion isEqualToString:@"V3"]) {

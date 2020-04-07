@@ -222,11 +222,7 @@
     //[self.mapView.routeManager requestRouteWithStart:self.mapView.routeStart End:self.mapView.routeEnd];
     
     //离线规划
-    if (!offlinRouteManager) {
-        offlinRouteManager = [BRTOfflineRouteManager routeManagerWithBuilding:self.mapView.building MapInfos:self.mapView.floorInfos];
-        offlinRouteManager.delegate = self;
-    }
-    [offlinRouteManager requestRouteWithStart:self.mapView.routeStart End:self.mapView.routeEnd];
+    [self.mapView.routeOfflineManager requestRouteWithStart:self.mapView.routeStart end:self.mapView.routeEnd];
 }
 
 #pragma mark - Actions

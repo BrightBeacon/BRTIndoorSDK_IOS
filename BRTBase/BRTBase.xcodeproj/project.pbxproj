@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2B798B8023B3517E00460652 /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B798B7F23B3517E00460652 /* Mapbox.framework */; };
-		2B798B8123B3517E00460652 /* Mapbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2B798B7F23B3517E00460652 /* Mapbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2B5D80AB2431CA8E00D8818F /* Mapbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2B5D80AA2431CA8E00D8818F /* Mapbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		582422D920B2D89F00C8D371 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 582422D820B2D89F00C8D371 /* AppDelegate.m */; };
 		582422E120B2D89F00C8D371 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 582422E020B2D89F00C8D371 /* Assets.xcassets */; };
 		582422E420B2D89F00C8D371 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 582422E220B2D89F00C8D371 /* LaunchScreen.storyboard */; };
@@ -22,7 +21,6 @@
 		587A602320B3CAE700FB0FDB /* BaseMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 587A5FE920B3CAE600FB0FDB /* BaseMapVC.m */; };
 		587A602520B3CAE700FB0FDB /* DemoTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 587A5FEE20B3CAE600FB0FDB /* DemoTableVC.m */; };
 		841BE9D520D3DC9A0005B586 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 841BE9D720D3DC9A0005B586 /* Localizable.strings */; };
-		8444B78720E255B1002C0982 /* Frameworks in Resources */ = {isa = PBXBuildFile; fileRef = 8444B78620E255B1002C0982 /* Frameworks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,7 +30,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				2B798B8123B3517E00460652 /* Mapbox.framework in Embed Frameworks */,
+				2B5D80AB2431CA8E00D8818F /* Mapbox.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -40,7 +38,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2B798B7F23B3517E00460652 /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mapbox.framework; path = "../BRT-Framework/Frameworks/Mapbox.framework"; sourceTree = "<group>"; };
+		2B5D80AA2431CA8E00D8818F /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mapbox.framework; path = "../BRT-Framework/Mapbox.framework"; sourceTree = "<group>"; };
 		582422D420B2D89F00C8D371 /* BRTBase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BRTBase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		582422D720B2D89F00C8D371 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		582422D820B2D89F00C8D371 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -67,8 +65,6 @@
 		587A603B20B3CC8900FB0FDB /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		841BE9D620D3DC9A0005B586 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		841BE9D820D3DCAC0005B586 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		8444B78420E2553D002C0982 /* libgeos.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libgeos.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		8444B78620E255B1002C0982 /* Frameworks */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Frameworks; path = "../BRT-Framework/Frameworks"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +72,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B798B8023B3517E00460652 /* Mapbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,10 +81,9 @@
 		582422CB20B2D89F00C8D371 = {
 			isa = PBXGroup;
 			children = (
-				8444B78620E255B1002C0982 /* Frameworks */,
+				2B5D80AA2431CA8E00D8818F /* Mapbox.framework */,
 				582422D620B2D89F00C8D371 /* BRTMapDemo */,
 				582422D520B2D89F00C8D371 /* Products */,
-				5886E91520C62D7C00A64D98 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -148,15 +142,6 @@
 			path = base;
 			sourceTree = "<group>";
 		};
-		5886E91520C62D7C00A64D98 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				2B798B7F23B3517E00460652 /* Mapbox.framework */,
-				8444B78420E2553D002C0982 /* libgeos.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -167,8 +152,8 @@
 				582422D020B2D89F00C8D371 /* Sources */,
 				582422D120B2D89F00C8D371 /* Frameworks */,
 				582422D220B2D89F00C8D371 /* Resources */,
-				582422F020B2DE9A00C8D371 /* ShellScript */,
 				2B798B8223B3517E00460652 /* Embed Frameworks */,
+				582422F020B2DE9A00C8D371 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -220,7 +205,6 @@
 				841BE9D520D3DC9A0005B586 /* Localizable.strings in Resources */,
 				582422E420B2D89F00C8D371 /* LaunchScreen.storyboard in Resources */,
 				582422E120B2D89F00C8D371 /* Assets.xcassets in Resources */,
-				8444B78720E255B1002C0982 /* Frameworks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,13 +385,13 @@
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = L2S5E9QH3S;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../BRT-Framework/**";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../BRT-Framework/";
 				GCC_PREFIX_HEADER = BRTMapDemo/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = BRTMapDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../BRT-Framework/";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../BRT-Framework/geos";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -437,13 +421,13 @@
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = L2S5E9QH3S;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../BRT-Framework/**";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../BRT-Framework/";
 				GCC_PREFIX_HEADER = BRTMapDemo/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = BRTMapDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../BRT-Framework/";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../BRT-Framework/geos";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",

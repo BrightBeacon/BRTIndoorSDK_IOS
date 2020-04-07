@@ -31,6 +31,7 @@
             self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
             self.titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
             self.titleLabel.text = text;
+            self.titleLabel.textColor = [UIColor blackColor];
             [self addSubview:self.titleLabel];
         }else{
             self.layer.cornerRadius = 20;
@@ -100,6 +101,8 @@
 #pragma mark - **************** delegate
 
 - (void)mapView:(BRTMapView *)mapView didClickAtPoint:(CGPoint)screen {
+    self.mapView.labelLayer.symbolHeight = [NSExpression expressionForConstantValue:@5];
+    self.mapView.facilityLayer.symbolHeight = [NSExpression expressionForConstantValue:@5];
     [self.mapView removeAnnotations:self.mapView.annotations];
 }
 - (MGLAnnotationImage *)mapView:(BRTMapView *)mapView imageForAnnotation:(id <MGLAnnotation>)annotation {
