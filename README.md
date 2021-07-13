@@ -7,25 +7,38 @@ BRTMap3D_IOS_SDK
 
 创建或打开XCode新项目
 
-## 1、项目设置
-* 再搜索Other Linker Flags->设置：<code>-ObjC -lc++ -lgeos -framework BRTMapSDK -framework BRTMapData -framework BRTLocationEngine</code>
- 
-## 2、引入geos目录下geos.xcodeproj项目（也可以先编译成libgeos.a库，配置Paths方式引用）
-* 项目引用需配置Build Phases->Target Dependencies->+geos
-* 再配置Link Binary With Libraries引入libgeos.a
-<br />*使用xcodeproj项目方式引入，磁盘占用小，方便调试git提交但编译慢；使用libgeos.a编译速度快。
+## 1、引入地图定位库（或配指向路径）
+* 公共资源库：[BRTMapData.framework](BRT-Framework/BRTMapData.framework)
+* 地图支撑库： [BRTMapSDK.framework](BRT-Framework/BRTMapSDK.framework)，[Mapbox.framework](BRT-Framework/Mapbox.framework)，[geos.a](BRT-Framework/geos/)
+* 定位支撑库：[BRTLocationEngine.framework](BRT-Framework/BRTLocationEngine.framework)
 
-## 3、拖动引入地图定位库（或配指向路径）
-* BRTMapData.framework库：[BRTMapData.framework](BRTMapDemo/BRTMapData.framework)
-* 集成地图需要： [BRTMapSDK.framework](BRTMapDemo/BRTMapSDK.framework)
-* 集成定位需要：[BRTLocationEngine.framework](BRTMapDemo/BRTLocationEngine.framework)
-* ps:如出现头文件无法找到，请检查Framework Search Paths是否包含以上库路径
+注意：Mapbox.framework为动态库，请添加到Build Phases->Embed Frameworks，并添加发布APP时候移除模拟器版本的RunScript:
 
-## 4、IOS8/IOS10以上需配置定位权限描述字符串
-* 打开Info.plist添加使用期间“WhenInUse”定位描述说明：NSLocationWhenInUseUsageDescription，（填写描述如：用于室内地图导航）
+```
+bash "${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mapbox.framework/strip-frameworks.sh"
+```
+
+
+## 2、IOS8/IOS10以上需配置定位/蓝牙权限描述字符串
+* 打开Info.plist添加蓝牙描述说明：NSBluetoothAlwaysUsageDescription，（填写描述如：使用蓝牙进行室内定位）
+* 打开Info.plist添加使用期间“WhenInUse”定位描述说明：NSLocationWhenInUseUsageDescription，（填写描述如：使用室内定位进行导航）
 * 若应用需要使用后台及使用期间定位权限“Always”(含“WhenInUse”)，需添加3项以支持不同IOS版本：NSLocationAlwaysAndWhenInUseUsageDescription、NSLocationAlwaysUsageDescription和NSLocationWhenInUseUsageDescription
 
 #### 更新日志
+***
+3.3.2
+允许使用styleURL配置mapbox支持的底地图，需在info.plist配置可用的MGLMapboxAccessToken
+<code>- (instancetype)initWithFrame:(CGRect)frame styleURL:(NSURL *)styleURL;</code>
+
+***
+3.3.1
+优化：允许起终点图标重叠，搜索支持自定义
+新增：BRTSearchAdapter->initWithDBPath:table:
+
+***
+3.2.0
+优化：升级mapbox
+新增：楼层路网数据：routeOfFloor
 
 ***
 3.1.9

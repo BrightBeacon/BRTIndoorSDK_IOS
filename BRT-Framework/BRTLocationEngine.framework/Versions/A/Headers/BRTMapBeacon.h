@@ -34,15 +34,15 @@ typedef enum proximity {
 /**
  *  Beacon的Tag，用于标识Beacon，如Mac地址，序列号等
  */
-@property (readonly, strong) NSString *tag;
+@property (nonatomic, strong) NSString *tag;
 
 /**
- *  扫描到Beacon的信号强度
+ *  扫描到Beacon的信号强度(-127为保留值）
  */
 @property (nonatomic, assign) int rssi;
 
 /**
- *  距离Beacon相对距离的准确性，单位为米，常用于相对远近比较
+ *  距离Beacon相对距离的准确性，单位为米，常用于相对远近比较（-1为保留值）
  */
 @property (nonatomic, assign) double accuracy;
 
@@ -50,6 +50,12 @@ typedef enum proximity {
  *  距离Beacon的相对距离，远/中/近
  */
 @property (nonatomic, assign) BRTProximity proximity;
+
+/**
+ *  Beacon扫描到的时间
+ */
+@property (nonatomic, assign) NSTimeInterval updateTime;
+
 
 /**
  *  Beacon用途类型，如用于定位、营销等

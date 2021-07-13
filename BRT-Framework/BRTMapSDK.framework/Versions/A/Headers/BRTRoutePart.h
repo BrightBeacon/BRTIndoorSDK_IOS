@@ -97,6 +97,13 @@
  */
 - (NSArray *)getRouteDirectionalHints;
 
+/**
+获取目标路径段按自定义距离的导航提示（基于道格拉斯-普格抽稀算法）
+
+@param distanceThrehold 忽略距离
+@return 目标路径段的导航提示
+*/
+- (NSArray *)getRouteDirectionalHintsIgnoreDistance:(double)distanceThrehold;
 
 /**
  获取目标路径段按自定义距离、角度忽略的导航提示

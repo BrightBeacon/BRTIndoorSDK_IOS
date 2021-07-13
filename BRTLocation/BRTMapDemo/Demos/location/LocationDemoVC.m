@@ -14,7 +14,6 @@
 
 @interface LocationDemoVC ()<BRTMapViewDelegate,BRTRouteManagerDelegate,BRTOfflineRouteManagerDelegate,BRTLocationManagerDelegate,UISearchBarDelegate>{
     IBOutlet UILabel *hintLabel;
-    BRTOfflineRouteManager *offlinRouteManager;
     BRTDirectionalHint *_lastHint;
 }
 

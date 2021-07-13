@@ -108,6 +108,11 @@ typedef struct offsetSize {
  */
 @property (nonatomic, strong) NSString *extendJSON;
 
+/**
+ * 建筑底层所显示楼层
+ */
+@property (nonatomic, strong) NSArray *groundFloors;
+
 
 /**
  *  建筑类的实例化方法

@@ -360,7 +360,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L2S5E9QH3S;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../BRT-Framework/**";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../BRT-Framework/";
 				GCC_PREFIX_HEADER = BRTMapDemo/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = BRTMapDemo/Info.plist;
@@ -383,6 +383,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Debug;
 		};
@@ -395,7 +396,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L2S5E9QH3S;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../BRT-Framework/**";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../BRT-Framework/";
 				GCC_PREFIX_HEADER = BRTMapDemo/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = BRTMapDemo/Info.plist;
@@ -418,6 +419,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Release;
 		};

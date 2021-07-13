@@ -8,9 +8,6 @@
 
 #import "LocationVC.h"
 #import <BRTLocationEngine/BRTLocationEngine.h>
-#import <BRTMapSDK/MercatorConvert.h>
-
-//登录http://open.brtbeacon.com，查看主动定位，点位管理
 
 @interface LocationVC ()<BRTLocationManagerDelegate>
 @property (nonatomic ,strong) BRTLocationManager *locationManager;
@@ -41,6 +38,16 @@
         return;
     }
 
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请至少配置一个定位设备" message:@"UUID:FDA50693-A4E2-4FB1-AFCF-C6EB076478250\nmajor:10186\nminor:47997~48000" preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleDefault handler:nil]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"配置工具" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://app.brtbeacon.com/brightbeacon"]];
+    }]];
+    if (alert.popoverPresentationController) {
+        alert.popoverPresentationController.sourceRect = self.view.bounds;
+        alert.popoverPresentationController.sourceView = self.view;
+    }
+    [self presentViewController:alert animated:YES completion:nil];
 //    [self.mapView setLocationSymbol:(UIImage *)];
     
     //可选设置请求运行时位置权限；需plist对应配置
@@ -101,6 +108,7 @@
  */
 - (void)BRTLocationManager:(BRTLocationManager *)manager didFailUpdateLocation:(NSError *)error {
     NSLog(@"定位失败：%@",error);
+    self.title = error.userInfo.allValues.description;
 }
 
 /**

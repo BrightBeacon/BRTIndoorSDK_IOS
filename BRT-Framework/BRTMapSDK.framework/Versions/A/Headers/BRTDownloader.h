@@ -21,6 +21,7 @@
 
 typedef void(^OnMapDataCompletion)(BRTMapUpdate *update, NSError* error);
 
++ (void)get:(NSString *)url callBack:(void (^)(id , NSError *))callback;
 + (void)updateMap:(NSString *)buildingID AppKey:(NSString *)appKey OnCompletion:(OnMapDataCompletion)completion;
 
 @end

@@ -1,69 +1,32 @@
-# BRTMap3D_IOS_SDK_Release
+# 定位SDK接入流程
 
 #### 项目介绍
-BRTMap3D_IOS_SDK_DEMO
+本demo为演示定位SDK接入，同时提供了定位+地图SDK展示，实际项目也可以单独仅集成定位SDK。
 
 #### 使用说明
 
 创建或打开XCode新项目
 
 ## 1、项目设置
-* 再搜索Other Linker Flags->设置：<code>-ObjC -lc++ -lgeos -framework BRTMapSDK -framework BRTMapData -framework BRTLocationEngine</code>
+* 定位地图通用Other Linker Flags->设置：<code>-ObjC -lc++ -lgeos -framework BRTMapSDK -framework BRTMapData -framework BRTLocationEngine</code>
+* 如仅使用定位Other Linker Flags->设置：<code>-ObjC -framework BRTMapData -framework BRTLocationEngine</code>
  
-## 2、拖动引入geos目录下geos.xcodeproj库（或编译成libgeos.a库）
-使用xcodeproj项目方式引入，占用小，方便git提交等；编译使用libgeos.a中间文件较大
-
-#### 拖动引入配置：<br/>
-* 然后配置Build Phases->Target Dependencies->+geos
+## 2、引入地图所需空间计算库[GEOS](./geos/libgeos.a)
+* 检查配置Build Phases->Target Dependencies->geos
 * 再配置Link Binary With Libraries引入libgeos.a
 
-#### 编译geos.xcodeproj工程：<br/>
-* libgeos.a库会根据平台生成到相应目录
-* 配置Library Search Paths:（示例）<br/>
-	$(PROJECT_DIR)/../BRT-Framework/geos/geos/Debug-$(PLATFORM_NAME)
+ps：(如未勾选拷贝geos文件到项目文件夹内，可能需手动配置geos及头文件所在路径)
 
-## 3、拖动引入地图定位库（或配指向路径）
-* 建筑数据公共库：[BRTMapData.framework](BRTMapDemo/BRTMapData.framework)
-* 集成地图需要： [BRTMapSDK.framework](BRTMapDemo/BRTMapSDK.framework)
-* 集成定位需要：[BRTLocationEngine.framework](BRTMapDemo/BRTLocationEngine.framework)
-* ps:如出现头文件无法找到，请检查Framework Search Paths是否包含以上库路径
+## 3、引入地图/定位库（或配指向路径）
+* 建筑数据公共库：[BRTMapData.framework](./BRTMapData.framework)
+* 集成地图需要： [BRTMapSDK.framework](./BRTMapSDK.framework),[Mapbox.framework需配置为Embed Frameworks并添加runScript移除发布APP时移除模拟器版本脚本](./Mapbox.framework)
+* 集成定位需要：[BRTLocationEngine.framework](./BRTLocationEngine.framework)
 
-## 4、IOS8以上配置定位权限
+ps:如出现头文件无法找到，请检查Framework Search Paths是否包含以上库路径
+
+## 4、配置蓝牙定位权限
 * 打开Info.plist添加使用期间“WhenInUse”定位描述说明：NSLocationWhenInUseUsageDescription，（填写描述如：用于室内地图导航）
 * 若应用需要使用后台及使用期间定位权限“Always”(含“WhenInUse”)，需添加3项以支持不同IOS版本：NSLocationAlwaysAndWhenInUseUsageDescription、NSLocationAlwaysUsageDescription和NSLocationWhenInUseUsageDescription
-
-## 5、拖动引入BRTBundle.bundle资源
-* 地图所需图标文件
-
-#### 更新日志
-
-***
-3.0.5
-修复：修正离线路网hint,修正distanceToRouteEnd
-
-***
-3.0.4
-修复：释放layer方便配置，修正hints，修正本地化
-
-***
-3.0.3
-修复：闪退，mapload和floor顺序
-
-***
-3.0.2
-新增：地图智能本地化，图文混排，独立搜索API
-修复：路径规划泄漏
-
-***
-3.0.1
-新增：BRTPoi新增labelPoint
-修复：加载逻辑，路网优化
-
-***
-3.0.0
-
-版本发布
-
 
 #### 智石科技
 

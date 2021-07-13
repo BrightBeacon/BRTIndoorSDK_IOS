@@ -40,9 +40,9 @@
 
 
 /**
- * 修改默认请求定位权限，默认请求always定位权限
+ * 修改默认请求定位权限类型，默认请求WhenInUse使用期间定位权限
  *
- * 请在Info.plist添加always定位描述说明：NSLocationAlwaysAndWhenInUsageDescription、NSLocationAlwaysUsageDescription和NSLocationWhenInUseUsageDescription，（填写描述如：用于室内地图导航）
+ * 请在Info.plist添加使用期间定位Key和描述说明:NSLocationWhenInUseUsageDescription，（填写描述如：用于室内地图导航）
  *
  * @param whenInUse 是否仅使用时期间定位权限
  */

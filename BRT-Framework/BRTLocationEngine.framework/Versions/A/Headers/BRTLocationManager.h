@@ -10,9 +10,11 @@
 #import <CoreMotion/CoreMotion.h>
 #import <BRTMapData/BRTMapData.h>
 #import "BRTLocationError.h"
+#import "BRTBLEEnvironment.h"
 
 @protocol BRTLocationManagerDelegate;
 
+@class BRTMapBeacon,BRTPublicBeacon;
 
 /**
  定位引擎
@@ -20,9 +22,9 @@
 @interface BRTLocationManager : NSObject
 
 /**
- *  初始化定位引擎
+ *  使用地图参数，初始化定位引擎
  *
- *  @param building 目标建筑(必须buildingID+initAngle用于定位方向校准)
+ *  @param building 目标建筑(必须含有buildingID+initAngle用于定位方向校准)
  *  @param aKey 用户appkey
  *
  *  @return 定位引擎实例
@@ -31,10 +33,10 @@
 
 
 /**
- *  初始化定位引擎
+ *  使用建筑ID+initAngle，初始化定位引擎
  *
  *  @param buildingID 目标建筑ID
-  *  @param initAngle 用于定位方向校准(使用didUpdateLocation所需)
+ *  @param initAngle 定位数据朝向(即地图正上方)所在北偏角（获取方法：持手机面向地图正上方所在指南针方向；影响didUpdateLocation，didUpdateMapHeading)
  *  @param aKey 用户appkey
  *
  *  @return 定位引擎实例
@@ -52,7 +54,7 @@
 - (void)stopUpdateLocation;
 
 /**
- *  获取最近一次的综合性位置信息
+ *  获取最近一次的综合性位置信息（较稳）
  *
  *  @return 位置信息
  */
@@ -60,21 +62,21 @@
 
 
 /**
- *  获取最近一次的信号位置信息
+ *  获取最近一次的信号位置信息（较快）
  *
  *  @return 位置信息
  */
 - (BRTLocalPoint *)getLastImmediateLocation;
 
 /**
- *  设置用于定位的Beacon参数
+ *  设置用于额外添加需要扫描的Beacon（默认已扫描建筑设备中包含的regions，结果在didRangedBeacons查看）
  *
  *  @param region Beacon Region参数
  */
 - (void)setBeaconRegion:(CLBeaconRegion *)region;
 
 /**
- * 设置定位地图正北角度，用于定位方向校准(使用didUpdateLocation，didUpdateMapHeading)
+ * 设置定位数据朝向(即地图正上方)所在北偏角（获取方法：持手机面向地图正上方所在指南针方向；影响didUpdateLocation，didUpdateMapHeading)
  *
  * @param angle 初始化角度
  */
@@ -97,7 +99,7 @@
 /**
  *  设置beacon信号阈值
  *
- *  @param threshold 低于此信号阈值将忽略beacon信号
+ *  @param threshold 低于此信号阈值将不触发定位回调（仅影响didUpdateLocation，didUpdateImmediateLocation）
  */
 - (void)setRssiThreshold:(int)threshold;
 
@@ -110,13 +112,13 @@
 - (void)enableHeatData:(BOOL)enable;
 
 /**
- *  请求超时时间，即超过此时间没有结果返回认为定位失败
+ *  请求超时时间，即超过此时间没有结果返回认为定位失败（回调didFailUpdateLocation）
  */
 @property (nonatomic, assign) float requestTimeOut;
 
 
 /**
- *  当前building
+ *  当前building的建筑ID
  */
 @property (nonatomic, strong) NSString *buildingID;
 
@@ -165,9 +167,9 @@
  *  Beacon扫描结果事件回调，返回符合扫描参数的所有Beacon
  *
  *  @param manager 定位引擎实例
- *  @param beacons Beacon数组，[BRTBeacon]
+ *  @param beacons Beacon数组，[BRTMapBeacon]
  */
-- (void)BRTLocationManager:(BRTLocationManager *)manager didRangedBeacons:(NSArray *)beacons;
+- (void)BRTLocationManager:(BRTLocationManager *)manager didRangedBeacons:(NSArray<BRTMapBeacon *> *)beacons;
 
 /**
  *  定位Beacon扫描结果事件回调，返回符合扫描参数的定位Beacon，定位Beacon包含坐标信息。此方法可用于辅助巡检，以及基于定位beacon的相关触发事件。
@@ -175,21 +177,22 @@
  *  @param manager 定位引擎实例
  *  @param beacons 定位Beacon数组，[BRTPublicBeacon]
  */
-- (void)BRTLocationManager:(BRTLocationManager *)manager didRangedLocationBeacons:(NSArray *)beacons;
+- (void)BRTLocationManager:(BRTLocationManager *)manager didRangedLocationBeacons:(NSArray<BRTPublicBeacon *> *)beacons;
 
 /**
  *  当前设备地磁北方向改变事件回调。
  *
  *  @param manager    定位引擎实例
- *  @param deviceHeading 手机设备北偏角
+ *  @param deviceHeading 手机设备北偏角（指南针方向）
  */
 - (void)BRTLocationManager:(BRTLocationManager *)manager didUpdateDeviceHeading:(double)deviceHeading;
 
 /**
- *  当前地图地磁北方向改变事件回调。已经加入initAngle(地图北偏角度)，可以直接用于设置地图旋转、定位箭头旋转方向等功能。
+ *  当前地图地磁北方向改变事件回调。已经加入initAngle修正，可以直接用于设置地图旋转、定位箭头旋转方向等功能。
+ *  initAngle：室内地图北偏角度（获取方法：持手机面向地图正上方所在指南针方向）
  *
  *  @param manager    定位引擎实例
- *  @param mapHeading 相对于地图的正北偏角（区别于手机设备）
+ *  @param mapHeading 相对于地图的正北偏角（mapHeading = deviceHeading - initAngle）
  */
 - (void)BRTLocationManager:(BRTLocationManager *)manager didUpdateMapHeading:(double)mapHeading;
 

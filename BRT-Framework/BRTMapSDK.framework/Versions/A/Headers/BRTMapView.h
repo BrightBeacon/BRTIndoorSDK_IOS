@@ -46,7 +46,7 @@ typedef enum {
 - (void)mapViewDidLoad:(BRTMapView *)mapView withError:(NSError *)error;
 
 /**
- *  地图楼层加载完成回调
+ *  地图楼层加载完成回调（含首次默认载入和地图楼层变化）
  *
  *  @param mapView 地图视图
  *  @param floorInfo 加载楼层信息
@@ -78,7 +78,7 @@ typedef enum {
 - (UIColor *)mapView:(BRTMapView *)mapView highlightColorForPoi:(BRTPoi *)poi;
 
 /**
- *  设置分类图标. {catergoryID,icon} => {NSNumber *,UIImage *}
+ *  自定义POI分类图标. {catergoryID,icon} => {NSNumber *,UIImage *}
  *
  *  @param mapView 地图视图
  */
@@ -174,6 +174,10 @@ typedef enum {
  */
 @property (nonatomic, weak) id<BRTMapViewDelegate> delegate;
 
+
+/*使用styleURL请在info.plist配置可用的MGLMapboxAccessToken*/
+- (instancetype)initWithFrame:(CGRect)frame styleURL:(NSURL *)styleURL;
+
 /**
  *  地图初始化方法
  *
@@ -197,14 +201,14 @@ typedef enum {
 
 /**
  *
- *  设置目标楼层
+ *  设置目标楼层，（地图初始化后即可设置，若无设置默认第一条楼层信息）
  *
  *  @param floor 楼层 -1,1
  */
 - (void)setFloor:(int)floor;
 
 /**
- * 设置地图滑动边界
+ * 设置地图滑动边界，（默认为currentFloorBounds）
  *
  * @param bounds 边界线
  */
@@ -233,6 +237,12 @@ typedef enum {
  */
 - (NSArray <BRTPoi *> *)getAllFacilityOnCurrentFloor;
 
+/**
+ *  获取本层文本数据
+ *
+ *  @return 文本数组
+ */
+- (NSArray <BRTPoi *> *)getAllLabelOnCurrentFloor;
 /**
  *  条件筛选本层poi数据
  *
@@ -264,21 +274,21 @@ typedef enum {
 - (void)setDefaultHighlightColor:(UIColor *)color;
 
 /**
- *  在地图显示当前楼层的导航路径
+ *  在地图显示当前楼层的规划路段
  */
 - (void)showRouteResultOnCurrentFloor;
 
 /**
- *  设置导航结果
+ *  设置路径规划结果（同时设置为多途经点规划方案的选中部分）
  *
- *  @param result 导航结果
+ *  @param result 路径结果
  */
 - (void)setRouteResult:(BRTRouteResult *)result;
 
 /*
- *  获取导航结果
+ *  获取路径规划结果
  *
- *  @retrun result 导航结果
+ *  @retrun result 路径结果
  */
 - (BRTRouteResult *)routeResult;
 
@@ -288,12 +298,12 @@ typedef enum {
 - (void)hiddenRouteLayer;
 
 /*
- *  移除导航结果，清除导航显示
+ *  移除导航结果，清除导航显示层
  */
 - (void)removeRouteLayer;
 
 /**
- *  根据坐标x和y提取当前楼层的ROOM POI
+ *  根据屏幕坐标x和y提取当前楼层的ROOM POI
  *
  *  @param point 屏幕坐标
  *
@@ -302,9 +312,18 @@ typedef enum {
 - (NSArray<BRTPoi *> *)extractPoiOnCurrentFloorWithPoint:(CGPoint)point;
 
 /**
- *  设置定位符号
+ *  根据地图坐标x和y提取当前楼层的ROOM POI
  *
- *  @param symbol 定位标识符号
+ *  @param lp 屏幕坐标
+ *
+ *  @return ROOM POI
+ */
+- (NSArray<BRTPoi *> *)extractPoiOnCurrentFloorWithLocalPoint:(BRTLocalPoint *)lp;
+
+/**
+ *  设置定位图标
+ *
+ *  @param symbol 定位标识图标
  */
 - (void)setLocationSymbol:(UIImage *)symbol;
 
@@ -314,6 +333,13 @@ typedef enum {
  * @param location 定位图标位置
  */
 - (void)showLocation:(BRTLocalPoint *)location;
+
+/**
+ * 显示定位图标
+ *
+ * @param location 定位图标位置
+ * @param animate  是否平滑移动过去
+ */
 - (void)showLocation:(BRTLocalPoint *)location animated:(BOOL)animate;
 
 /**
@@ -329,66 +355,66 @@ typedef enum {
 - (void)processDeviceRotation:(double)newHeading;
 
 /**
- * 在线路径管理
+ * 在线路径管理，使用在线请求
  */
 @property (nonatomic) BRTRouteManager *routeManager;
 
 /**
- * 离线路径管理
+ * 离线路径管理，使用本地计算
  */
 @property (nonatomic) BRTOfflineRouteManager *routeOfflineManager;
 
 /**
- *  在地图当前楼层显示起点符号
+ *  在地图当前楼层显示起点图标
  *
  *  @param sp 起点位置
  */
 - (void)showRouteStartSymbolOnCurrentFloor:(BRTLocalPoint *)sp;
 
 /**
- *  在地图当前楼层显示终点符号
+ *  在地图当前楼层显示终点图标
  *
  *  @param ep 终点位置
  */
 - (void)showRouteEndSymbolOnCurrentFloor:(BRTLocalPoint *)ep;
 
 /**
- *  设置导航线的起点符号
+ *  设置导航线的起点图标
  *
- *  @param symbol 起点标识符号
+ *  @param symbol 起点标识图标
  */
 - (void)setRouteStartSymbol:(UIImage *)symbol;
 
 /**
- *  设置导航线的终点符号
+ *  设置导航线的终点图标
  *
- *  @param symbol 终点标识符号
+ *  @param symbol 终点标识图标
  */
 - (void)setRouteEndSymbol:(UIImage *)symbol;
 
 /**
- *  设置跨层导航切换点符号
+ *  设置跨层导航切换点图标
  *
- *  @param symbol 切换点标识符号
+ *  @param symbol 切换点标识图标
  */
 - (void)setRouteSwitchSymbol:(UIImage *)symbol;
 
 /**
- *  设置导航线颜色
+ *  设置路线规划线默认颜色
  *
  *  @param color 颜色
  */
 - (void)setRouteColor:(UIColor *)color;
 
 /**
- *  设置导航经过线颜色
+ *  设置路线规划经过部分线颜色
  *
  *  @param color 颜色
  */
 - (void) setPassedRouteColor:(UIColor *)color;
 
 /**
- *  设置导航多途径线底色
+ *  设置路线规划多途径线底色
  *
  *  @param color 颜色
  */
@@ -402,14 +428,14 @@ typedef enum {
 - (void)showPassedAndRemainingRouteResultOnCurrentFloor:(BRTLocalPoint *)lp;
 
 /**
- *  在地图上显示当前楼层目标位置已经过的路径和未经过的剩余路径
+ *  在地图上显示当前楼层目标位置，已经过的路径和剩余路径
  *
  *  @param lp 目标位置
  */
 - (void)showRemainingRouteResultOnCurrentFloor:(BRTLocalPoint *)lp;
 
 /**
- * 本层地图范围
+ * 本层地图边界范围
  *
  * @return 地图范围
  */

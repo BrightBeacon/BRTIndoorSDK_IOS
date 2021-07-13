@@ -13,8 +13,13 @@
 @interface BRTSearchAdapter : NSObject
 
 
+/// 初始化自定义查询DB（仅支持使用queryAnySql方法）
+/// @param path DB路径
+/// @param table sqllite表名
+- (id)initWithDBPath:(NSString *)path table:(NSString *)table;
+
 /**
- 初始化建筑搜索类
+ 初始化建筑DB搜索
 
  @param buildingID 建筑ID
  @return 搜索类
@@ -22,22 +27,30 @@
 - (id)initWithBuildingID:(NSString *)buildingID;
 
 /**
- 初始化<=范围(米)去重名搜索类
+ 初始化<=范围(米)去重搜索类
 
  @param buildingID 建筑ID
- @param threshold 去除阀值(米)内重复名称的数据
+ @param threshold 去除阈值(米)内重复名称的数据（例如同一电梯可能有区域POI和设施POI）
  @return 搜索类
  */
 - (id)initWithBuildingID:(NSString *)buildingID distinct:(double)threshold;
 
 
 /**
- 根据自定sql检索POI名称
+ 根据sql规则检索，并返回POI结果
 
- @param sql sql语句
- @return POI数组
+ @param sql 限定查询POI的sql语句，否则无法正常返回（例：select * from POI where ？，返回BRTPOI数组）
+ @return POI结果数组
  */
-- (NSArray<BRTPoi *> *)querySql:(NSString *)sql;
+ - (NSArray<BRTPoi *> *)querySql:(NSString *)sql;
+
+/**
+ 根据sql规则检索，并返回Sql查询结果（例：select count(*) as sum from POI，返回{"sum":20}）
+
+@param sql 任意sql语句
+@return sql结果Dic数组
+*/
+- (NSArray<NSDictionary *> *)queryAnySql:(NSString *)sql;
 
 /**
  根据关键字模糊检索所有楼层POI名称

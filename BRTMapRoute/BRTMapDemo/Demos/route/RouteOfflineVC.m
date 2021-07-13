@@ -100,7 +100,7 @@
     if (self.mapView.routeStart&&self.mapView.routeEnd) {
         [self.mapView removeAnnotations:self.mapView.annotations];
         self.offlineRouteManager.delegate = self;
-        [self.offlineRouteManager requestRouteWithStart:self.mapView.routeStart end:self.mapView.routeEnd stops:self.stops sortStop:NO vehicle:NO ignore:self.fobiddenCid?@[self.fobiddenCid]:nil];
+        [self.offlineRouteManager requestRouteWithStart:self.mapView.routeStart forward:nil end:self.mapView.routeEnd stops:self.stops sortStop:NO vehicle:NO ignore:self.fobiddenCid?@[self.fobiddenCid]:nil];
     }
 }
 

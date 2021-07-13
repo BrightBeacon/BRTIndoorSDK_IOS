@@ -33,6 +33,7 @@
 #define IMAGE_SOURCE_ROUTEEND @"routeEnd"
 
 // =========== Map Layer Name ===================
+#define LAYER_NAME_GROUND @"GroundLayer"
 #define LAYER_NAME_FLOOR @"FloorLayer"
 #define LAYER_NAME_SHADE @"ShadeLayer"
 #define LAYER_NAME_ROOM @"RoomLayer"

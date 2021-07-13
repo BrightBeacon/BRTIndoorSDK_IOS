@@ -33,14 +33,16 @@
     CLLocationCoordinate2D coord = [self.mapView convertPoint:screen toCoordinateFromView:nil];
     mapCoords[index++] = coord;
     
-    MGLPolyline *polyline = [MGLPolyline polylineWithCoordinates:mapCoords count:index];
-    [mapView addAnnotation:polyline];
-    
-    MGLPointAnnotation *ann = [[MGLPointAnnotation alloc] init];
-    ann.coordinate = coord;
-    [mapView addAnnotation:ann];
-    
-    tipLabel.text = [NSString stringWithFormat:@"全长%.2f米",[[GeometryEngine defaultEngine] lengthOfGeometry:polyline]];
+    if (index > 1) {
+        MGLPolyline *polyline = [MGLPolyline polylineWithCoordinates:mapCoords count:index];
+        [mapView addAnnotation:polyline];
+        
+        MGLPointAnnotation *ann = [[MGLPointAnnotation alloc] init];
+        ann.coordinate = coord;
+        [mapView addAnnotation:ann];
+        
+        tipLabel.text = [NSString stringWithFormat:@"全长%.2f米",[[GeometryEngine defaultEngine] lengthOfGeometry:polyline]];
+    }
 }
 
 @end

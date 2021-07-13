@@ -85,12 +85,13 @@
  请求路径规划，在代理方法获取规划结果
 
  @param start 起点
+ @param to 起点朝向
  @param end 终点
  @param stops 途径点
  @param sort 是否途径点重排序
  @param vehicle 是否车行规划
  @param cids 禁行设施分类
  */
-- (void)requestRouteWithStart:(BRTLocalPoint *)start end:(BRTLocalPoint *)end stops:(NSArray<BRTLocalPoint *> *)stops sortStop:(BOOL)sort vehicle:(BOOL)vehicle ignore:(NSArray<NSString *> *)cids;
+- (void)requestRouteWithStart:(BRTLocalPoint *)start forward:(BRTLocalPoint *)to end:(BRTLocalPoint *)end stops:(NSArray<BRTLocalPoint *> *)stops sortStop:(BOOL)sort vehicle:(BOOL)vehicle ignore:(NSArray<NSString *> *)cids;
 
 @end
